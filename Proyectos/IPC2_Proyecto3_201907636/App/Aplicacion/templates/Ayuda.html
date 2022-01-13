@@ -1,0 +1,13 @@
+{% extends "Inicio.html" %}
+{% block title %} Ayuda {% endblock %}
+{% block titulo %} Documentacion {% endblock %}
+{% block content %}
+{% load static %}
+
+<div style="text-align: center;">
+      <object class="cajapdf" data="{% static 'Documentacion Proyecto Final.pdf' %}" width="950px" height="1000px"></object>
+
+    </div>
+{% endblock content %}
+
+

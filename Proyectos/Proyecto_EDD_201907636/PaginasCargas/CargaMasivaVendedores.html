@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1>Carga Vendedores</h1>
+</head>
+<body style="background: rgb(37, 195, 156);"">
+  <div class="seccion-titulo">
+    <h2><b></b>Cargue un Archivo JSON</b></h2> 
+    <br><br><br><br>
+    
+
+    <input type = 'file' id = 'archivoT'>
+    <br><br><br><br>
+    <button onclick="cargar()">Enviar</button>
+
+    <div>
+ 
+    </div>
+    <div>
+        
+        </div>
+        <textarea id = "contenido" cols="90" rows="25">
+
+        </textarea>
+        <label>Escriba el id para generar el calendario</label>
+        <input  type="id" name="id" id="id">
+</div>
+  
+    </div>
+</body>
+<script>
+    let info;
+    var archi;
+    let nombreArchivo;
+    function abrir(ev){
+      let arch = ev.target.files[0];
+      if (arch){
+         let reader = new FileReader();
+          reader.onload = function(a){
+              let contenido = a.target.result;
+              texto = document.getElementById("contenido");
+              texto.value = contenido;
+              let Archivojson = JSON.parse(contenido);
+              let prueba = Archivojson.vendedores;
+              let prueba2 = prueba.eventos;
+              console.log(prueba2);
+              //console.log(JSON.parse(contenido));
+              var count = 0;
+              for (x in prueba){
+
+                console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nEdad: " + prueba[count].edad + "\nCorreo: "+prueba[count].correo+ "\nContraseña: " +prueba[count].password );
+                arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
+                count++;
+            }
+            arbol.inOrden(arbol.raiz);
+            arbol.generarDot();
+            
+          
+            };
+          reader.readAsText(arch);
+      }
+      }
+  
+      window.addEventListener('load', () =>{
+      document.getElementById('archivoT').addEventListener('change', abrir);
+  
+  });
+  
+
+
+
+ 
+</script>
+</html>

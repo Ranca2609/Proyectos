@@ -1,0 +1,39 @@
+{
+    "Lista": [
+        {
+            "Artista": "Cuarteto de Nos",
+            "Album": "El Cuarteto de Nos",
+            "VecesReproducidas": "5",
+            "Imagen": "https://e.snmc.io/i/1200/s/afb947e3c71b75ba78459a5ff097784b/8229990",
+            "Ruta": "https://drive.google.com/file/d/15rvbLTJdiatPZuEX-b9nJyfEWfuOnAzi/preview"
+        },
+        {
+            "Artista": "Miranda",
+            "Album": "Magistral",
+            "VecesReproducidas": "9",
+            "Imagen": "https://img.discogs.com/iTAqjAR-XQRBrXk8xhunR4Mhebg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3311021-1450196918-2261.jpeg.jpg",
+            "Ruta": "https://drive.google.com/file/d/1FUKxMvo5UNrqFjYxgbtkzU2rJ0hghFV0/preview"
+        },
+        {
+            "Artista": "MCR",
+            "Album": "Danger Days",
+            "VecesReproducidas": "6",
+            "Imagen": "https://img.discogs.com/RFIOmO3iameATRsUJcL_ixXX_Kw=/fit-in/600x599/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-2599972-1424190310-6373.jpeg.jpg",
+            "Ruta": "https://drive.google.com/file/d/1w0zZ2AFP9oewPuSvtweaoz6PO8rYqQoT/preview"
+        },
+        {
+            "Artista": "Miranda",
+            "Album": "Magistral",
+            "VecesReproducidas": "1",
+            "Imagen": "https://img.discogs.com/iTAqjAR-XQRBrXk8xhunR4Mhebg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3311021-1450196918-2261.jpeg.jpg",
+            "Ruta": "https://drive.google.com/file/u/1/d/1Ykqz2OW00pPlgQnsjpY-K1HqbR-bNZzL/preview"
+        },
+        {
+            "Artista": "MCR",
+            "Album": "Three Cheers For Sweet Revenge",
+            "VecesReproducidas": "0",
+            "Imagen": "https://m.media-amazon.com/images/I/81aECQlJWwL._SX466_.jpg",
+            "Ruta": "https://drive.google.com/file/d/13B3MZJUg_tqTY_oluo1wOtv0_qOJ8Wo6/preview"
+        }
+    ]
+}

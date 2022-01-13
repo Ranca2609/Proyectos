@@ -1,0 +1,34 @@
+{% extends "Inicio.html" %}
+{% block title %} Clasificacion de Canciones {% endblock %}
+{% block titulo %} Clasificacion de Canciones {% endblock %}
+{% block content %}
+{% load static %}
+<img src="{% static 'Calificacion.png' %}">
+<form action = "/Clasi/" method="GET" >
+{% csrf_token %}
+<div style="text-align: center;">
+<!--Primer Calificacion-->
+<label for = "fname" >Escribe el nombre de la Cancion: </label>
+<input type="text" id="fname" name="fname" style="width:250px;height:50px;">
+<label for = "estrellas" >Escribe la Calificacion: </label>
+<input type="text" id="estrellas" name="estrellas" style="width:250px;height:50px;">
+<br><br>
+<!--Segunda Calificacion-->
+<label for = "fname" >Escribe el nombre de la Cancion: </label>
+<input type="text" id="fname2" name="fname2" style="width:250px;height:50px;">
+<label for = "estrellas" >Escribe la Calificacion: </label>
+<input type="text" id="estrellas2" name="estrellas2" style="width:250px;height:50px;">
+<br><br>
+<!--Tercera Calificacion-->
+<label for = "fname" >Escribe el nombre de la Cancion: </label>
+<input type="text" id="fname3" name="fname3" style="width:250px;height:50px;">
+<label for = "estrellas3" >Escribe la Calificacion: </label>
+<input type="text" id="estrellas3" name="estrellas3" style="width:250px;height:50px;">
+</div>
+<br><br>
+<div style="text-align: center;">
+<button  class="btn btn-danger btn-sm" width="100" height="100" style="width:120px;height:50px;">Enviar Calificacion</button>
+</div>
+<br><br>
+</form>
+{% endblock content %}

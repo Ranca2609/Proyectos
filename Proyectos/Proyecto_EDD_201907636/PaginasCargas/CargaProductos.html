@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>One Page Wonder - Start Bootstrap Template</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#page-top">Seccion de Carga Masiva</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="C:\Users\Carlos Rangel\Documents\GitHub\Rangel260944.github.io\HomeAdmin.html">Regresar al inicio</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="masthead text-center text-white">
+            <div class="masthead-content">
+                <div class="container px-5">
+                    <h1 class="masthead-heading mb-0">Carga Productos</h1>
+                   <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
+                
+                   <input type = 'file' id = 'archivoT'>
+                
+                </div>
+               
+             
+            </div>
+    
+            <textarea id = "contenido"  style="background-color: #062c33; Color:#fff600;"   cols="90" rows="25">
+
+            </textarea>
+            <br><br>
+            <button onclick="GenerarDot()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Generar Dot</button>
+            <br><br><br>
+
+    
+            <textarea id = "Dot" style="background-color: #062c33; Color:#fff600;"   cols="90" rows="25"></textarea>            
+            <br><br>            
+            <h1 class="masthead-heading mb-0">Visualiza tu Grafica :D</h1>
+           
+            <br><br>
+            <div id = 'Graphviz'>
+                <iframe frameborder="0" width="1400" height="1000" src="https://dreampuf.github.io/GraphvizOnline/#digraph%20G%20%7B%0A%0A%20%20subgraph%20cluster_0%20%7B%0A%20%20%20%20style%3Dfilled%3B%0A%20%20%20%20color%3Dlightgrey%3B%0A%20%20%20%20node%20%5Bstyle%3Dfilled%2Ccolor%3Dwhite%5D%3B%0A%20%20%20%20a0%20-%3E%20a1%20-%3E%20a2%20-%3E%20a3%3B%0A%20%20%20%20label%20%3D%20%22process%20%231%22%3B%0A%20%20%7D%0A%0A%20%20subgraph%20cluster_1%20%7B%0A%20%20%20%20node%20%5Bstyle%3Dfilled%5D%3B%0A%20%20%20%20b0%20-%3E%20b1%20-%3E%20b2%20-%3E%20b3%3B%0A%20%20%20%20label%20%3D%20%22process%20%232%22%3B%0A%20%20%20%20color%3Dblue%0A%20%20%7D%0A%20%20start%20-%3E%20a0%3B%0A%20%20start%20-%3E%20b0%3B%0A%20%20a1%20-%3E%20b3%3B%0A%20%20b2%20-%3E%20a3%3B%0A%20%20a3%20-%3E%20a0%3B%0A%20%20a3%20-%3E%20end%3B%0A%20%20b3%20-%3E%20end%3B%0A%0A%20%20start%20%5Bshape%3DMdiamond%5D%3B%0A%20%20end%20%5Bshape%3DMsquare%5D%3B%0A%7D"></iframe>
+            </div>
+            <br><br>
+            <br><br>
+
+            <h1>Añadir Producto</h1>
+            <label>Id</label>
+            <input  type="text" name="id" id="id" >
+            <br><br>
+            <label>Nombre</label>
+            <input  type="text" name="nombre" id="nombre" >
+            <br><br>
+            <label>Precio</label>
+            <input  type="text" name="precio" id="precio">
+            <br><br>
+            <label>Cantidad</label>
+            <input  type="text" name="cantidad" id="cantidad" >
+            <br><br>
+            <button onclick="Nuevo_Producto()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Añadir Producto</button>
+
+        </header>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-black">
+            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Carlos Roberto Rangel Castillo 201907636</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+      
+ 
+        <script>
+            let info;
+            var archi;
+            let nombreArchivo;
+            let prueba;
+            function abrir(ev){
+              let arch = ev.target.files[0];
+              if (arch){
+                 let reader = new FileReader();
+                  reader.onload = function(a){
+                      let contenido = a.target.result;
+                      texto = document.getElementById("contenido");
+                      texto.value = contenido;
+                      let Archivojson = JSON.parse(contenido);
+                      prueba = Archivojson.productos;
+                      var count = 0;
+                      for (x in prueba){
+                        console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nPrecio: " + prueba[count].precio + "\nCantidad: "+prueba[count].cantidad);
+                        arbol.insertar_nodo(prueba[count].id, prueba[count].nombre,prueba[count].precio,prueba[count].cantidad)
+                        count++;
+                    }
+                    //Generar dot
+                    console.log(arbol.graficar())
+                    Grafica()
+      
+                    };
+                  reader.readAsText(arch);
+              }
+              }
+              window.addEventListener('load', () =>{
+              document.getElementById('archivoT').addEventListener('change', abrir);        
+          });
+
+          function Grafica(){
+            link = "https://dreampuf.github.io/GraphvizOnline/#"+arbol.graficar();
+            link = link.replace(/(\r\n|\n|\r)/gm, "");
+            console.log(link);
+            NuevaRuta = "<iframe id='graph' src='"+link+"' height='1000px' style='width: 1400px''></iframe>"
+            
+            document.getElementById("Graphviz").innerHTML = NuevaRuta;
+          }
+          
+
+          function GenerarDot(){
+
+            document.getElementById("Dot").innerHTML = arbol.graficar();
+
+          }
+          function Nuevo_Producto(){
+            var id = document.querySelector('#id').value
+            var nombre = document.querySelector('#nombre').value
+            var precio = document.querySelector('#precio').value
+            var cantidad = document.querySelector('#cantidad').value              
+            arbol.insertar_nodo(id, nombre,precio, cantidad)
+            document.getElementById("Dot").innerHTML = Grafica();
+          }
+
+
+          class nodoB{
+            constructor(dato, nombre, precio, cantidad){
+                this.dato = dato;
+                this.nombre = nombre;
+                this.precio = precio;
+                this.cantidad = cantidad;
+                //apuntadores de lista - tipo nodoB
+                this.siguiente = null; 
+                this.anterior = null;
+                //apuntadores de arbol - tipo pagina
+                this.izq = null;
+                this.der = null;
+            }
+        }
+        /************************************************************ */
+        
+        /*****Lista Ordenada para almacenar los valores ****************/
+        class lista_nodoB{
+            constructor(){
+                this.primero = null;
+                this.ultimo = null;
+                this.size=0;
+            }
+        
+            insertar(nuevo){
+                if(this.primero == null){
+                    this.primero = nuevo;
+                    this.ultimo = nuevo;
+                    this.size++;
+                    return true;
+                }else{
+                    if(this.primero == this.ultimo){ // solo hay un dato en la lista
+                        if(nuevo.dato < this.primero.dato){
+                            nuevo.siguiente = this.primero;
+                            this.primero.anterior = nuevo;
+                            //cambiar punteros de paginas
+                            this.primero.izq = nuevo.der;
+        
+                            this.primero = nuevo;
+                            this.size++;
+                            return true;
+                        }else if(nuevo.dato> this.ultimo.dato){
+                            this.ultimo.siguiente = nuevo;
+                            nuevo.anterior = this.ultimo;
+                            //cambiar punteros de paginas
+                            this.ultimo.der = nuevo.izq;
+        
+                            this.ultimo = nuevo;
+                            this.size++;
+                            return true;
+                        }else{ // el dato es igual al primero
+                            console.log("Ya existe un dato con ese valor en la lista");
+                            return false;
+                        }
+                    }else{ //hay mas de un dato
+                        if(nuevo.dato < this.primero.dato){
+                            nuevo.siguiente = this.primero;
+                            this.primero.anterior = nuevo;
+                            //cambiar punteros de paginas
+                            this.primero.izq = nuevo.der;
+        
+                            this.primero = nuevo;
+                            this.size++;
+                            return true;
+                        }else if(nuevo.dato> this.ultimo.dato){
+                            this.ultimo.siguiente = nuevo;
+                            nuevo.anterior = this.ultimo;
+                            //cambiar punteros de paginas
+                            this.ultimo.der = nuevo.izq;
+        
+                            this.ultimo = nuevo;
+                            this.size++;
+                            return true;
+                        }else{
+                            let aux = this.primero;
+                            while(aux != null){
+                                if(nuevo.dato < aux.dato){
+                                    nuevo.siguiente = aux;
+                                    nuevo.anterior = aux.anterior;
+                                    // cambiar los punteros de las paginas
+                                    aux.izq= nuevo.der;
+                                    aux.anterior.der = nuevo.izq;
+                                    //******************************* 
+                                    aux.anterior.siguiente = nuevo;
+                                    aux.anterior = nuevo;
+                                    this.size++;
+                                    return true;
+                                }else if(nuevo.dato == aux.dato){
+                                    console.log("Ya existe un dato con ese valor en la lista");
+                                    return false;
+                                }else{
+                                    aux = aux.siguiente;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /************************************************************ */
+        
+        /****************** Pagina del arbol B ************************/
+        class pagina{
+            constructor(){
+                this.raiz = false;
+                this.claves_max = 4;
+                this.claves_min = 2;
+                this.size =0;
+                this.claves = new lista_nodoB();
+            }
+        
+            insertar_EnPagina(nodo){
+                if(this.claves.insertar(nodo)){
+                    this.size = this.claves.size;
+                    if(this.size < 5){
+                        return this;
+                    }else if(this.size == 5){ //dividir pagina
+                        return this.dividir_pagina(this);
+                    }
+                }
+                return null;
+            }
+        
+            dividir_pagina(pag){
+                let temp = pag.claves.primero;
+                for(var i=0; i<2;i++){ //ubicarnos en la posicion [2] de la lista (mitad)
+                    temp = temp.siguiente;
+                }
+        
+                //pasar valores de la pagina a nodos independientes
+                let primero = pag.claves.primero;
+                let segundo = pag.claves.primero.siguiente;
+                let tercero = temp.siguiente;
+                let cuarto = pag.claves.ultimo;
+        
+                primero.siguiente = null;
+                primero.anterior = null;
+        
+                segundo.siguiente = null;
+                segundo.anterior = null;
+        
+                tercero.siguiente = null;
+                tercero.anterior = null;
+        
+                cuarto.siguiente = null;
+                cuarto.anterior = null;
+        
+                temp.siguiente = null;
+                temp.anterior = null;
+        
+                //** crear nuevas paginas */
+                let pag_izquierda = new pagina();
+                pag_izquierda.insertar_EnPagina(primero);
+                pag_izquierda.insertar_EnPagina(segundo);
+        
+                let pag_dercha = new pagina();
+                pag_dercha.insertar_EnPagina(tercero);
+                pag_dercha.insertar_EnPagina(cuarto);
+        
+                temp.izq = pag_izquierda;
+                temp.der = pag_dercha;
+        
+                return temp;
+            }
+        
+            es_hoja(pag){
+                if(pag.claves.primero.izq==null){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        /************************************************************ */
+        
+        /************************** Arbol B ***************************/
+        class Arbol_B{
+            constructor(){
+                this.raiz = null;
+                this.orden =5;
+                this.altura =0;
+            }
+        
+            insertar_nodo(dato, nombre, precio, cantidad){
+                let nuevo = new nodoB(dato, nombre, precio, cantidad);
+                
+                if(this.raiz == null){
+                    this.raiz = new pagina();
+                    this.raiz.raiz = true;
+                    this.raiz = this.raiz.insertar_EnPagina(nuevo);
+                    //console.log("se inserto el valor "+this.raiz.claves.primero.dato);
+                }else{
+                    if(this.altura==0){
+                        let respuesta = this.raiz.insertar_EnPagina(nuevo);
+                        if(respuesta instanceof pagina){// la raiz no se dividio
+                            this.raiz = respuesta;
+                        }else{
+                            this.altura++;
+                            this.raiz = new pagina();
+                            this.raiz = this.raiz.insertar_EnPagina(respuesta);
+                        }
+                    }else{ // ya existe mas de una pagina, hay que recorrer el arbol para insertar el nuevo
+                        if(this.raiz == null){
+                            console.log("la raiz es null ")
+                            return;
+                        }   
+                        let respuesta = this.insertar_recorrer(nuevo,this.raiz);
+                        if(respuesta instanceof nodoB){ // la raiz se dividio
+                            this.altura++;
+                            this.raiz = new pagina();
+                            this.raiz = this.raiz.insertar_EnPagina(respuesta);
+                        }else if(respuesta instanceof pagina){
+                            this.raiz = respuesta;
+                        }
+                    }
+                }
+            }
+        
+            insertar_recorrer(nuevo, pagina_actual){
+                if(pagina_actual.es_hoja(pagina_actual)){
+                    let respuesta = pagina_actual.insertar_EnPagina(nuevo);
+                    return respuesta;
+                }else{
+                    if(nuevo.dato < pagina_actual.claves.primero.dato){ // va a la izquierda
+                        let respuesta = this.insertar_recorrer(nuevo,pagina_actual.claves.primero.izq);
+                        if(respuesta instanceof nodoB){ // la pagina se dividio y el nodo se tiene que insertar en la pagina actual
+                            return pagina_actual.insertar_EnPagina(respuesta);
+                        }else if(respuesta instanceof pagina){
+                            pagina_actual.claves.primero.izq = respuesta;
+                            return pagina_actual;
+                        }
+                    }else if(nuevo.dato > pagina_actual.claves.ultimo.dato){ // va a la derecha porque es mayor al ultimo
+                        let respuesta = this.insertar_recorrer(nuevo,pagina_actual.claves.ultimo.der);
+                        if(respuesta instanceof nodoB){ // la pagina se dividio y el nodo se tiene que insertar en la pagina actual
+                            return pagina_actual.insertar_EnPagina(respuesta);
+                        }else if(respuesta instanceof pagina){
+                            pagina_actual.claves.ultimo.der = respuesta;
+                            return pagina_actual;
+                        }
+                    }else{ // va en los apuntadores de los nodos de en medio
+                        let aux = pagina_actual.claves.primero;
+        
+                        while(aux != null){
+                            if(nuevo.dato < aux.dato){
+                                let respuesta = this.insertar_recorrer(nuevo, aux.izq);
+                                if(respuesta instanceof nodoB){ // la pagina se dividio y el nodo se tiene que insertar en la pagina actual
+                                    return pagina_actual.insertar_EnPagina(respuesta);
+                                }else if(respuesta instanceof pagina){
+                                    aux.izq = respuesta;
+                                    aux.anterior.der = respuesta;
+                                    return pagina_actual;
+                                }
+                            }else if(nuevo.dato == aux.dato){
+                                return pagina_actual;
+                            }else{
+                                aux = aux.siguiente;
+                            }
+                        }
+                    }
+                }
+                return this;
+            }
+        
+            graficar(){
+                let cadena="digraph arbolB{\n";
+                cadena+="rankr=TB;\n";
+                cadena+="node[shape = box,fillcolor=\"crimson\" color=\"black\" style=\"filled\"];\n";
+                //metodos para graficar el arbol
+                cadena+= this.graficar_nodos(this.raiz);
+                cadena+=  this.graficar_enlaces(this.raiz);
+                cadena+="}\n"
+        
+                return cadena;
+            }
+        
+            graficar_nodos(raiz_actual){
+                let cadena="";
+        
+                if(raiz_actual.es_hoja(raiz_actual)){ //si es un hhoja solo grafica el nodo
+                    cadena+="node[shape=record label= \"<p0>"
+                    let contador=0;
+                    let aux = raiz_actual.claves.primero;
+                    while(aux!=null){
+                        contador++;
+                        cadena+="|{"+"Id: "+aux.dato+"\nNombre: "+aux.nombre+"\nPrecio: "+aux.precio+"\nCantidad: "+aux.cantidad+"}|<p"+contador+"> ";
+                        aux= aux.siguiente;
+                    }
+                    cadena+="\"]"+raiz_actual.claves.primero.dato+";\n";
+                    return cadena;
+                }else{
+                    cadena+="node[shape=record label= \"<p0>"
+                    let contador=0;
+                    let aux = raiz_actual.claves.primero;
+                    while(aux!=null){
+                        contador++;
+                        cadena+="|{"+"Id: "+aux.dato+"\nNombre: "+aux.nombre+"\nPrecio: "+aux.precio+"\nCantidad: "+aux.cantidad+"}|<p"+contador+"> ";
+                        aux= aux.siguiente;
+                    }
+                    cadena+="\"]"+raiz_actual.claves.primero.dato+";\n";
+        
+                    //recorrer los hicos de cada clave
+                    aux = raiz_actual.claves.primero;
+                    while(aux != null){
+                        cadena+= this.graficar_nodos(aux.izq);
+                        aux = aux.siguiente;
+                    }
+                    cadena+= this.graficar_nodos(raiz_actual.claves.ultimo.der);
+                    return cadena;
+                }   
+            }
+        
+            graficar_enlaces(raiz_actual){
+                let cadena="";
+                if(raiz_actual.es_hoja(raiz_actual)){
+                    return ""+raiz_actual.claves.primero.dato+";\n";
+                }else{
+                    //cadena += ""+raiz_actual.claves.primero.dato+";\n";
+        
+                    let aux = raiz_actual.claves.primero;
+                    let contador =0;
+                    let raiz_actual_txt = raiz_actual.claves.primero.dato;
+                    while(aux != null){
+                        cadena+= "\n"+raiz_actual_txt+":p"+contador+"->"+this.graficar_enlaces(aux.izq);
+                        contador++;
+                        aux = aux.siguiente;
+                    }
+                    cadena+="\n"+raiz_actual_txt+":p"+contador+"->"+this.graficar_enlaces(raiz_actual.claves.ultimo.der);
+                    return cadena;
+                }
+            }
+        }
+        
+        
+        let arbol = new Arbol_B();
+
+  
+
+
+
+
+          
+          
+        </script>
+    </body>
+</html>

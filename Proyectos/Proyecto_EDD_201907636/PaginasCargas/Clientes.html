@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>One Page Wonder - Start Bootstrap Template</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#page-top">Seccion de Carga Masiva</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="C:\Users\Carlos Rangel\Documents\GitHub\Rangel260944.github.io\HomeAdmin.html">Regresar al inicio</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="masthead text-center text-white">
+            <div class="masthead-content">
+                <div class="container px-5">
+                    <h1 class="masthead-heading mb-0">Carga Eventos y Listado de Meses</h1>
+                   <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
+                   <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
+                   <input type = 'file' id = 'archivoT'>
+                </div>
+            </div>
+            <div class="bg-circle-1 bg-circle"></div>
+            <div class="bg-circle-2 bg-circle"></div>
+            <div class="bg-circle-3 bg-circle"></div>
+            <div class="bg-circle-4 bg-circle"></div>
+            <textarea id = "contenido" cols="90" rows="25">
+
+            </textarea>
+            
+            <h1 class="masthead-heading mb-0">DOT Calendario</h1>
+            <label>Ingrese el id del vendedor: </label>
+            <input  type="id" name="id" id="id" >
+            
+            <div>
+                <button onclick="escoger_por_id()" class="btn btn-primary btn-xl rounded-pill mt-5">Generar DOT</button>
+            </div>
+            
+            <div>
+            
+            <textarea id = "DOT" cols="90" rows="25">
+
+            </textarea></div>
+            <h1>Añadir Evento</h1>
+            <label>Id</label>
+            <input  type="text" name="id" id="id" >
+            <br><br>
+            <label>Dia</label>
+            <input  type="dia" name="dia" id="dia" >
+            <br><br>
+            <label>Hora</label>
+            <input  type="hora" name="hora" id="hora">
+            <br><br>
+            <label>Descripcion del evento</label>
+            <input  type="desc" name="desc" id="desc" >
+            <br><br>
+            <button onclick="añadir_evento()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Añadir</button>
+           
+
+            <h2>
+                Anadir evento a vendedor sin eventos
+                <br><br>
+                <label>Id</label>
+                <input  type="text" name="id2" id="id2" >
+                <br><br>
+                <label>Dia</label>
+                <input  type="dia2" name="dia2" id="dia2" >
+                <br><br>
+                <label>Hora</label>
+                <input  type="hora2" name="hora2" id="hora2">
+                <br><br>
+                <label>Descripcion del evento</label>
+                <input  type="desc2" name="desc2" id="desc2" >
+                <br><br>
+                <button onclick="añadir_a_quien_no_tiene()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Añadir</button>
+               
+            </h2>
+
+ 
+
+
+        </header>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-black">
+            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script>
+            let info;
+            var archi;
+            let nombreArchivo;
+            let prueba;
+            let prueba2;
+            function abrir(ev){
+              let arch = ev.target.files[0];
+              if (arch){
+                 let reader = new FileReader();
+                  reader.onload = function(a){
+                      let contenido = a.target.result;
+                      texto = document.getElementById("contenido");
+                      texto.value = contenido;
+                      let Archivojson = JSON.parse(contenido);
+                      prueba = Archivojson.vendedores;
+                      prueba2 = prueba.eventos;
+
+                    };
+                  reader.readAsText(arch);
+              }
+              }
+              window.addEventListener('load', () =>{
+              document.getElementById('archivoT').addEventListener('change', abrir);   
+          });
+          function escoger_por_id(){
+            var id = document.querySelector('#id').value
+            var count = 0;
+            var count2 = 0;
+            for(x in prueba){
+                let prueba2 = prueba[count].eventos;
+                if(id == prueba[count].id){
+                  //console.log(prueba[0].eventos[0].mes);
+                  for(eventos in prueba2){
+                      console.log(prueba[count].eventos[count2].desc);
+                      matriz1.insertar(prueba[count].eventos[count2].desc,prueba[count].eventos[count2].dia, prueba[count].eventos[count2].hora)                                
+                      lista.insertarMes(prueba[count].eventos[count2].mes)
+                      count2++;
+                  }    
+           }count++;
+          }matriz1.graficar_matriz()
+          lista.generarDotLista()
+         // var texto = cadena;
+
+       // document.getElementById("DOT").innerHTML = texto;
+          }
+
+           function añadir_evento(){
+            var id = document.querySelector('#id').value
+            var desc = document.querySelector('#desc').value
+            var dia = document.querySelector('#dia').value
+            var hora = document.querySelector('#hora').value
+            var count = 0;
+            var count2 = 0;
+            for(x in prueba){
+                let prueba2 = prueba[count].eventos;
+                if(id == prueba[count].id){
+                  //console.log(prueba[0].eventos[0].mes);
+                  for(eventos in prueba2){
+                      //console.log(prueba[count].eventos[count2].desc);
+                      matriz1.insertar(desc,dia,hora)                                
+                      count2++;
+                  }    
+           }count++;
+          }matriz1.graficar_matriz()            
+
+           }
+
+           function añadir_a_quien_no_tiene(){
+            var id = document.querySelector('#id2').value
+            var desc = document.querySelector('#desc2').value
+            var dia = document.querySelector('#dia2').value
+            var hora = document.querySelector('#hora2').value
+            matriz1.insertar(desc,dia,hora) 
+            matriz1.graficar_matriz()  
+           }
+          
+
+          class nodo_interno{
+            constructor(valor,x,y){
+                this.valor = valor;
+                this.x = x;
+                this.y = y;
+                //apuntadores
+                this.siguiente = null;
+                this.ant = null;
+        
+                this.arriba = null;
+                this.abajo = null;
+            }
+        }
+        
+        class lista_interna{
+            constructor(){
+                this.primero = null;
+            }
+        
+            insertar_x(valor, x,y){ 
+
+                let nuevo = new nodo_interno(valor,x,y);
+        
+                if(this.primero == null){
+
+                    this.primero = nuevo;
+                }else{
+                    if(nuevo.y < this.primero.y){
+
+                        nuevo.siguiente = this.primero;
+
+                        this.primero.ant = nuevo;
+
+                        this.primero = nuevo;
+                    }else{
+                        let aux = this.primero;
+                        while(aux != null){
+
+                            if(nuevo.y < aux.y){
+                                nuevo.siguiente = aux;
+
+                                nuevo.ant = aux.ant;
+                                
+                                aux.ant.siguiente = nuevo;
+
+                                aux.ant= nuevo;
+                                break;
+                            }else if(nuevo.x == aux.x && nuevo.y == aux.y){
+
+                                console.log("La posicion ya esta ocupada-> "+nuevo.x+","+nuevo.y);
+
+                                break;
+                            }else{
+                                if(aux.siguiente ==null){
+                                    aux.siguiente=nuevo;
+                                    nuevo.ant = aux;
+                                    break;
+                                }else{
+                                    aux = aux.siguiente;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+            insertar_y(valor, x,y){ 
+                let nuevo = new nodo_interno(valor,x,y);
+        
+                if(this.primero == null){
+                    this.primero = nuevo;
+                }else{
+                    if(nuevo.x < this.primero.x){
+
+                        nuevo.abajo = this.primero;
+
+                        this.primero.arriba = nuevo;
+                        this.primero = nuevo;
+
+                    }else{
+                        let aux = this.primero;
+                        while(aux != null){
+
+                            if(nuevo.x < aux.x){
+
+                                nuevo.abajo = aux;
+                                nuevo.arriba = aux.arriba;
+
+                                aux.arriba.abajo = nuevo;
+                                aux.arriba= nuevo;
+                                break;
+                            }else if(nuevo.x == aux.x && nuevo.y == aux.y){
+
+                                console.log("La posicion ya esta ocupada-> "+nuevo.x+","+nuevo.y);
+                                break;
+
+                            }else{
+                                if(aux.abajo ==null){
+
+                                    aux.abajo=nuevo;
+
+                                    nuevo.arriba = aux;
+
+                                    break;
+
+                                }else{
+                                    aux = aux.abajo;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+            recorrer_x(){
+                let aux = this.primero;
+                while(aux != null){
+                    console.log("valor =",aux.valor," - x = ",aux.x , " y = ",aux.y);
+                    aux = aux.siguiente;
+                }
+            }
+            recorrer_y(){
+                let aux = this.primero;
+                while(aux != null){
+                    console.log("valor =",aux.valor," - x = ",aux.x , " y = ",aux.y);
+                    aux = aux.abajo;
+                }
+            }
+        }
+        
+        class nodo_cabecera{
+            constructor(dato){
+                this.dato = dato;
+                this.siguiente= null;
+                this.ant = null;
+                this.lista_interna = new lista_interna();
+            }
+        }
+        
+        class lista_cabecera{
+            constructor(){
+                this.primero = null;
+            }
+        
+            insertar_cabecera(nuevo){
+        
+                if(this.primero == null){
+                    this.primero = nuevo;
+                }else{
+                    if(nuevo.dato<this.primero.dato){
+                        nuevo.siguiente = this.primero;
+                        this.primero.ant=nuevo;
+                        this.primero = nuevo;
+                    }else{
+                        let aux = this.primero;
+                        while(aux != null){
+                            if(nuevo.dato < aux.dato){
+                                nuevo.siguiente = aux;
+                                nuevo.ant = aux.ant;
+                                aux.ant.siguiente = nuevo;
+                                aux.ant = nuevo;
+                                break;
+                            }else{
+                                if(aux.siguiente == null){
+                                    aux.siguiente = nuevo;
+                                    nuevo.ant = aux;
+                                    break;
+                                }else{
+                                    aux = aux.siguiente;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+            buscar_cabecera(dato){
+                let aux = this.primero;
+                while(aux != null){
+                    if(aux.dato == dato){
+                        return aux;
+                    }else{
+                        aux = aux.siguiente;
+                    }
+                }
+                return null;
+            }
+        
+            recorrer(){
+                let aux = this.primero;
+                while(aux != null){
+                    console.log("dato =",aux.dato);
+                    aux = aux.siguiente;
+                }
+            }
+        }
+        
+        class matriz{
+            constructor(){
+                this.cabeceras_dia = new lista_cabecera();
+                this.cabeceras_horas = new lista_cabecera();
+            }
+        
+            insertar(valor,x,y){
+                let nodo_cabecera_X = this.cabeceras_dia.buscar_cabecera(x);
+                let nodo_cabecera_y = this.cabeceras_horas.buscar_cabecera(y);
+        
+                if(nodo_cabecera_X == null){
+                    nodo_cabecera_X =  new nodo_cabecera(x);
+                    this.cabeceras_dia.insertar_cabecera(nodo_cabecera_X);
+                }
+        
+                if(nodo_cabecera_y == null){
+                    nodo_cabecera_y =  new nodo_cabecera(y);
+                    this.cabeceras_horas.insertar_cabecera(nodo_cabecera_y);
+                }
+        
+     
+                nodo_cabecera_X.lista_interna.insertar_x(valor,x,y);
+     
+                nodo_cabecera_y.lista_interna.insertar_y(valor,x,y);
+            }
+        
+            recorrer_matriz(){
+                console.log("cabeceras en X");
+                let aux = this.cabeceras_dia.primero;
+                while(aux != null){
+                    console.log("   pos->"+aux.dato);
+                    let aux2 = aux.lista_interna.primero;
+                    while(aux2!= null){
+                        console.log("       -"+aux2.valor);
+                        aux2 = aux2.siguiente;
+                    }
+                    aux = aux.siguiente;
+                }
+        
+                console.log("cabeceras en Y");
+                aux = this.cabeceras_horas.primero;
+                while(aux != null){
+                    console.log("   pos->"+aux.dato);
+                    let aux2 = aux.lista_interna.primero;
+                    while(aux2!= null){
+                        console.log("       -"+aux2.valor);
+                        aux2 = aux2.abajo;
+                    }
+                    aux = aux.siguiente;
+                }
+            }
+        
+            graficar_matriz(){
+                let cadena="";
+                cadena+= "digraph Calendario{ \n";
+                cadena+= "node[shape = box,width=0.7,height=0.7,fillcolor=\"firebrick2\" color=\"white\" style=\"filled\"];\n";
+                cadena+= "edge[style = \"bold\"]; \n"
+             
+                cadena+="node[label = Calendario fillcolor=\" dodgerblue2\" pos = \"-1,1!\"]principal;"
+        
+                let aux_x = this.cabeceras_dia.primero;
+                while(aux_x!=null){
+                    cadena+="node[label = "+aux_x.dato+" fillcolor=\" firebrick2\" pos = \""+aux_x.dato+",1!\"]x"+aux_x.dato+";\n"
+                    aux_x = aux_x.siguiente;
+                }
+                aux_x = this.cabeceras_dia.primero;
+                while(aux_x.siguiente != null){
+                    cadena+="x"+aux_x.dato+"->"+"x"+aux_x.siguiente.dato+";\n"
+                    cadena+="x"+aux_x.siguiente.dato+"->"+"x"+aux_x.dato+";\n"
+                    aux_x = aux_x.siguiente;
+                }
+        
+                if(this.cabeceras_dia.primero!= null){
+                    cadena+="principal->x"+this.cabeceras_dia.primero.dato+";\n";
+                }
+         
+                let aux_y = this.cabeceras_horas.primero;
+                while(aux_y!=null){
+                    cadena+="node[label = "+aux_y.dato+" fillcolor=\" firebrick2\" pos = \"-1,-"+aux_y.dato+"!\"]y"+aux_y.dato+";\n"
+                    aux_y = aux_y.siguiente;
+                }
+                aux_y = this.cabeceras_horas.primero;
+                while(aux_y.siguiente != null){
+                    cadena+="y"+aux_y.dato+"->"+"y"+aux_y.siguiente.dato+";\n"
+                    cadena+="y"+aux_y.siguiente.dato+"->"+"y"+aux_y.dato+";\n"
+                    aux_y = aux_y.siguiente;
+                }
+        
+                if(this.cabeceras_dia.primero!= null){
+                    cadena+="principal->y"+this.cabeceras_horas.primero.dato+";\n";
+                }
+          
+                aux_x = this.cabeceras_dia.primero;
+                while(aux_x!=null){ 
+                    let aux = aux_x.lista_interna.primero;
+                    while(aux!=null){
+                        cadena+="   node[label = "+aux.valor+" fillcolor=\" darkorange2\" pos = \""+aux.x+",-"+aux.y+"!\"]x"+aux.x+"y"+aux.y+";\n"
+                        aux = aux.siguiente;
+                    }
+        
+             
+                    aux = aux_x.lista_interna.primero;
+                    while(aux.siguiente!= null){
+                        cadena+="   x"+aux.x+"y"+aux.y+"->x"+aux.siguiente.x+"y"+aux.siguiente.y+";\n";
+                        cadena+="   x"+aux.siguiente.x+"y"+aux.siguiente.y+"->x"+aux.x+"y"+aux.y+";\n";
+                        aux= aux.siguiente;
+                    }
+                    if(aux_x.lista_interna.primero!= null){
+                        cadena+="x"+aux_x.dato+"->"+"x"+aux_x.lista_interna.primero.x+"y"+aux_x.lista_interna.primero.y+";\n";
+                    }
+        
+                    aux_x = aux_x.siguiente;
+                }
+        
+                aux_y = this.cabeceras_horas.primero;
+                while(aux_y!=null){ 
+          
+                    let aux = aux_y.lista_interna.primero;
+                    while(aux.abajo!= null){
+                        cadena+="   x"+aux.x+"y"+aux.y+"->x"+aux.abajo.x+"y"+aux.abajo.y+";\n";
+                        cadena+="   x"+aux.abajo.x+"y"+aux.abajo.y+"->x"+aux.x+"y"+aux.y+";\n";
+                        aux= aux.abajo;
+                    }
+                    if(aux_y.lista_interna.primero!= null){
+                        cadena+="y"+aux_y.dato+"->"+"x"+aux_y.lista_interna.primero.x+"y"+aux_y.lista_interna.primero.y+";\n";
+                    }
+                    aux_y = aux_y.siguiente;
+                }
+        
+                cadena+= "\n}"
+                console.log(cadena);
+                return cadena
+
+            }
+            
+        }
+        
+        
+        let matriz1 = new matriz();
+        
+        
+        class Nodo{
+            constructor(dato){
+                this.dato = dato;
+
+                this.siguiente = null;
+                this.anterior = null;
+            }
+        }
+        
+        class ListaMeses{
+            constructor(){
+            this.raiz = null;
+            }
+        
+            insertarMes(dato){
+                let nodo_nuevo = new Nodo(dato)
+                if (this.raiz == null){
+                    this.raiz = nodo_nuevo;
+                }else{
+                    let temporal = this.raiz;
+                    while(temporal.siguiente != null){
+                        temporal = temporal.siguiente;
+                    }
+                    temporal.siguiente = nodo_nuevo;
+                    temporal.anterior = nodo_nuevo;
+                }
+            }
+            generarDotLista(){
+                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = box, color=deepskyblue , style=filled, fillcolor=darkslategray2];\n';
+                cadena+= this.generar_nodos(this.raiz)
+                cadena+="\n"
+                cadena+=this.enlazar(this.raiz)
+                cadena+="\n}"
+        
+                console.log(cadena)
+            }
+        
+            generar_nodos(raiz_actual){ 
+                let nodos =""
+               
+                if(raiz_actual != null){
+                   
+                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Mes: "+raiz_actual.dato+"\"]\n"
+              
+                }
+                return nodos
+            }
+        
+            enlazar(raiz_actual){
+                let cadena=""
+                if(raiz_actual != null){
+                    cadena += this.enlazar(raiz_actual.siguiente)
+                    if(raiz_actual.siguiente != null){
+                        cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.siguiente.dato+"\n"
+                    }
+                    if(raiz_actual.anterior != null){
+                        cadena+= "n"+raiz_actual.siguiente.dato+"-> n"+raiz_actual.dato +"\n"
+                    }
+                
+        
+                    
+                }
+                return cadena
+            }
+        
+        }
+
+        lista = new ListaMeses()
+
+        
+         
+        </script>
+    </body>
+</html>
