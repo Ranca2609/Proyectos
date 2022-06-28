@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Estilos_Todas_Paginas/E_RegistrarUsuario.css">
+    <title>Registrar Cliente</title>
+</head>
+<body style="background: rgb(71, 255, 178);">
+
+    
+    <header>
+     
+      
+        <div class="rigth_are">
+        </div>
+    </header>
+
+
+    <br><br>
+
+    <br><br><br>
+    <section class="form-register">
+        <div style="width:400px; margin:0 auto;" class="input-group mb-3">
+        <h4 style="font-size: 35px;"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrar Cliente</h4>
+        
+
+        <br><br><br>
+        <div>
+        <label>DPI:</label>
+        <input class="form-control input_pass" type="text" name="apellidos" id="dpi">
+        </div>
+        <br><br><br>
+        <div>
+        <label>Nombre</label>
+        <input class="form-control input_pass" type="text" name="nombres" id="username">
+        </div>
+        <br><br><br>
+        <div>
+        <label>Apellido:</label>
+        <input class="form-control input_pass" type="text" name="nombres" id="apellido" >
+        </div>
+        <div>
+        <label>Correo</label>
+        <input class="form-control input_pass" type="text" name="nombres" id="correo">
+        </div>
+        <br><br><br>
+        <div>
+        <label>Password</label>
+        <input class="form-control input_pass" type="password" name="nombres" id="password">
+        </div>
+        <br><br><br>
+        <div>
+        <label> Confirmar Password</label>
+        <input class="form-control input_pass" type="password" name="nombres" id="confirpassword">
+        </div>
+        <br><br><br>
+        <div>
+        <label>Edad</label>
+        <input class="form-control input_pass" type="text" name="nombres" id="edad">
+        </div>
+        <br><br><br>
+        <div>
+        <label>Compras</label>
+        <input class="form-control input_pass" type="text" name="nombres" id="compras">
+        </div>
+        <br><br><br>
+        <button onclick="RegistrarCliente()" type="button" name="button" class="btn login_btn">Registrar</button>    
+    </div>
+    </section>
+    <script>
+
+function RegistrarCliente() {
+
+var apellido = document.querySelector('#apellido').value
+var dpi = document.querySelector('#dpi').value
+var username = document.querySelector('#username').value
+var correo = document.querySelector('#correo').value
+var password = document.querySelector('#password').value
+var edad = document.querySelector('#edad').value
+var compras= document.querySelector('#compras').value
+var confirpassword = document.querySelector('#password').value
+        var objeto = {
+            'apellido': apellido,
+            'dpi': dpi,
+            'username': username,
+            'correo': correo,
+            'password': password,
+            'edad': edad,
+            'compras': compras,
+        }
+
+    fetch('http://127.0.0.1:3000/cliente', {
+        method: 'PUT',
+        body: JSON.stringify(objeto),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+        .catch(err => {
+            console.error('Error:', err)
+            alert("Ocurrió un error al registrar al usuario.")
+        })
+        .then(response => {
+            if (response.message == "Failed") {
+                alert(`El Cliente ${correo} ya se encuentra registrado.`)
+            } else {
+                alert(`Se ha registrado con éxito. Ahora ${correo} es un cliente nuevo`)
+                sessionStorage.setItem("correo", corre)
+            }
+        })
+    console.log(objeto)
+    }
+    </script>
+
+</body>
+</html>

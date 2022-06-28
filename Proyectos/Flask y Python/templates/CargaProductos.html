@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1> Carga Productos</h1>
+</head>
+<body style="background: rgb(218, 110, 22);">
+    <div class="seccion-titulo">
+       
+        
+ 
+        <input type = 'file' id = 'archivoT'>
+        <br><br><br><br>
+        <button onclick="enviarInfo()">Enviar</button>
+
+        <input id="cod" type="text" class="form-control input_pass">
+        <div>
+     
+        </div>
+        <div>
+            
+            </div>
+            <textarea id = "contenido">
+    
+            </textarea>
+    </div>
+      
+        </div>
+      
+</body>
+<script>
+    function abrir(ev){
+        let arch = ev.target.files[0];
+        if (arch){
+            let reader = new FileReader();
+    
+            reader.onload = function(a){
+                let contenido = a.target.result;
+                texto = document.getElementById("contenido");
+                texto.value = contenido;
+            };
+            reader.readAsText(arch);
+        }
+        }
+    window.addEventListener('load', () =>{
+        document.getElementById('archivoT').addEventListener('change', abrir);
+    
+    });
+    
+    function enviarInfo(){
+        let contenido = document.getElementById('contenido')
+    
+        let info = {
+            Productos: contenido.value
+        }
+        console.log(contenido.value)
+    
+        fetch('http://127.0.0.1:3000/producto', {
+            method: 'PUT',
+            body: JSON.stringify(info),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    
+    }
+
+
+</script>
+</html>

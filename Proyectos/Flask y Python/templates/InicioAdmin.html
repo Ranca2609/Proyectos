@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1>
+        Bienvenido Usuario Administrador
+    </h1>
+
+    <button onclick = "CrearCliente()">
+        Crear Cliente
+    </button>
+    <button onclick = "CargaProductos()">
+        Carga Masiva Productos
+    </button>
+</head>
+<body  style="background: rgb(206, 62, 6);">
+    
+</body>
+<script>
+    function CrearCliente(){
+        location.href = "{{ url_for('PaginaCrearCliente') }}"
+    }
+    function CargaProductos(){
+        location.href = "{{ url_for('CargaProductos') }}"
+
+    }
+</script>
+</html>
